@@ -19,6 +19,7 @@ function FitBounds({ geojson }){
 
 export default function MapComponent(){
   const [polygons, setPolygons] = useState(null)
+  const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000'
   const [lines, setLines] = useState(null)
   const [heatData, setHeatData] = useState([])
   const [userLocation, setUserLocation] = useState(null)
@@ -45,17 +46,17 @@ export default function MapComponent(){
 
   useEffect(()=>{
     // Load polygons and lines from backend
-    axios.get('http://localhost:4000/features/polygons').then(r=>{
+    axios.get(`${API_BASE}/features/polygons`).then(r=>{
       const features = { type: 'FeatureCollection', features: r.data.map(item => ({ type:'Feature', geometry:item.geometry, properties:item.properties })) }
       setPolygons(features)
     }).catch(console.error)
 
-    axios.get('http://localhost:4000/features/lines').then(r=>{
+    axios.get(`${API_BASE}/features/lines`).then(r=>{
       const features = { type: 'FeatureCollection', features: r.data.map(item => ({ type:'Feature', geometry:item.geometry, properties:item.properties })) }
       setLines(features)
     }).catch(console.error)
 
-    axios.get('http://localhost:4000/users/locations').then(r=>{
+    axios.get(`${API_BASE}/users/locations`).then(r=>{
       setHeatData(r.data)
     }).catch(console.error)
   },[])
@@ -85,7 +86,7 @@ export default function MapComponent(){
         try {
           const start = `${routePoints.origin.lat},${routePoints.origin.lng}`
           const end = `${routePoints.dest.lat},${routePoints.dest.lng}`
-          const r = await axios.get(`http://localhost:4000/route?start=${start}&end=${end}`)
+          const r = await axios.get(`${API_BASE}/route?start=${start}&end=${end}`)
           if (r.data && r.data.routes && r.data.routes[0]) {
             const route = r.data.routes[0]
             setRouteGeoJSON(route.geometry)
@@ -111,7 +112,7 @@ export default function MapComponent(){
           const center = tmp.getBounds().getCenter()
           const start = `${userLocation.lat},${userLocation.lng}`
           const end = `${center.lat},${center.lng}`
-          const r = await axios.get(`http://localhost:4000/route?start=${start}&end=${end}`)
+          const r = await axios.get(`${API_BASE}/route?start=${start}&end=${end}`)
           if(r.data && r.data.routes && r.data.routes[0]){
             const route = r.data.routes[0]
             setRouteGeoJSON(route.geometry)
