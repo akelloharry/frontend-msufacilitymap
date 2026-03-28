@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maseno University Map</title>
+    <!--
+      Optional runtime config for Supabase when hosting on static hosts
+      (edit these values in the deployed index.html on gh-pages or replace
+      the placeholders below with your real Supabase project values and
+      anon key). Alternately set VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY
+      at build time.
+    -->
+    <meta name="supabase-url" content="https://zwqfyyxolnaauvagcvds.supabase.co">
+    <meta name="supabase-anon-key" content="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3cWZ5eXhvbG5hYXV2YWdjdmRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNTU2MzgsImV4cCI6MjA4OTgzMTYzOH0.S9qNAO3UJgWP_LUyTDfwQMqcAmPScjSHi_MNFL47kcE">
+    <script type="module" crossorigin src="/msufacilitymap/assets/index-ca9dfd20.js"></script>
+    <link rel="stylesheet" href="/msufacilitymap/assets/index-c5ce273e.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Optional: set Supabase runtime config via meta tags on static hosts (edit after deploy) -->
+    <script>
+      (function(){
+        try{
+          const urlMeta = document.querySelector('meta[name="supabase-url"]')
+          const keyMeta = document.querySelector('meta[name="supabase-anon-key"]')
+          if(urlMeta) window.SUPABASE_URL = urlMeta.content
+          if(keyMeta) window.SUPABASE_ANON_KEY = keyMeta.content
+        }catch(e){}
+      })()
+    </script>
+    
+  </body>
+</html>
